@@ -27,6 +27,19 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
 
+      # Si un test falla o la cobertura no llega al mínimo, el job termina en rojo.
+      - name: Ejecutar tests con cobertura
+        run: npx ng test --watch=false --coverage
+
+      # if: se sube también cuando los tests fallan, para poder consultar el informe.
+      - name: Subir informe de cobertura
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: cobertura
+          path: coverage
+          if-no-files-found: ignore
+
       - name: Compilar Angular
         run: npx ng build --base-href /cicd-angular/
 

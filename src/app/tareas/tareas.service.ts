@@ -37,4 +37,22 @@ export class TareasService {
   borrar(id: number): void {
     this.lista.update((ts) => ts.filter((t) => t.id !== id));
   }
+
+  /** Resume el estado de la lista en una frase. */
+  resumen(): string {
+    const total = this.lista().length;
+    const pendientes = this.pendientes();
+    if (total === 0) {
+      return 'No hay tareas';
+    }
+    if (pendientes === 0) {
+      return 'Todo hecho';
+    }
+    if (pendientes === total) {
+      return 'Todo por hacer';
+    }
+    const hechas = total - pendientes;
+    const porcentaje = Math.round((hechas / total) * 100);
+    return `${hechas} de ${total} (${porcentaje} %)`;
+  }
 }

@@ -10,5 +10,5 @@ import { ListaTareas } from './lista-tareas/lista-tareas';
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly titulo = signal('Mi lista de tareas');
+  protected readonly titulo = signal('Tareas de despliegue');
 }

@@ -1,0 +1,31 @@
+name: Angular CI/CD
+
+# on: cuándo se ejecuta. En cada PR hacia main y en cada push a main.
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  # build (CI): compila el proyecto en una máquina limpia.
+  build:
+    runs-on: ubuntu-latest
+    # permissions: este job solo necesita leer el código.
+    permissions:
+      contents: read
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Instalar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Compilar Angular
+        run: npx ng build --base-href /cicd-angular/

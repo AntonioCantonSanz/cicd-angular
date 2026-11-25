@@ -29,3 +29,29 @@ jobs:
 
       - name: Compilar Angular
         run: npx ng build --base-href /cicd-angular/
+
+      # if: en una PR no se publica nada, así que el artefacto solo se sube en push.
+      - name: Subir artefacto de Pages
+        if: github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/cicd-angular/browser
+
+  # deploy (CD): publica en GitHub Pages lo que ha compilado build.
+  deploy:
+    # needs: espera a build y no arranca si build falla.
+    needs: build
+    # if: solo en push a main, nunca en una PR.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    # permissions: los mínimos para publicar en Pages.
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Desplegar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

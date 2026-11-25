@@ -1,0 +1,21 @@
+<p class="resumen">Pendientes: {{ servicio.pendientes() }}</p>
+<ul>
+  @for (tarea of servicio.tareas(); track tarea.id) {
+    <li [class.hecha]="tarea.hecha">
+      <label>
+        <input type="checkbox" [checked]="tarea.hecha" (change)="servicio.alternar(tarea.id)" />
+        <span>{{ tarea.texto }}</span>
+      </label>
+      <button
+        type="button"
+        class="borrar"
+        [attr.aria-label]="'Borrar ' + tarea.texto"
+        (click)="servicio.borrar(tarea.id)"
+      >
+        ✕
+      </button>
+    </li>
+  } @empty {
+    <li class="vacia">No hay tareas.</li>
+  }
+</ul>

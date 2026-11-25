@@ -1,0 +1,13 @@
+<form (submit)="enviar($event)">
+  <input
+    type="text"
+    aria-label="Nueva tarea"
+    placeholder="Nueva tarea…"
+    [value]="texto()"
+    (input)="escribir($event)"
+  />
+  <button type="submit">Añadir</button>
+</form>
+@if (error()) {
+  <p class="error" role="alert">{{ error() }}</p>
+}

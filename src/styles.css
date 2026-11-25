@@ -1,0 +1,10 @@
+body { margin: 0; padding: 0 1rem; font-family: system-ui, sans-serif; background: #f5e1da; color: #2f2329; }
+form { display: flex; gap: .5rem; }
+input[type='text'] { flex: 1; min-width: 0; padding: .6rem; font: inherit; border: 1px solid #b9a1ab; border-radius: 6px; }
+button { padding: .6rem 1rem; font: inherit; color: #fff; background: #b33d74; border: 0; border-radius: 6px; cursor: pointer; }
+.error { color: #a3161f; }
+.resumen { font-weight: 600; }
+ul { list-style: none; margin: 0; padding: 0; }
+li { display: flex; justify-content: space-between; align-items: center; padding: .4rem 0; border-top: 1px solid #eedde3; }
+li.hecha span { text-decoration: line-through; color: #6b5a62; }
+.borrar { padding: .25rem .6rem; color: #b33d74; background: none; }

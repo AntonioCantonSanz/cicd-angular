@@ -8,4 +8,5 @@ Práctica 4 de Despliegue (2º DAW): integración y despliegue continuos de una 
 ```bash
 npm ci
 npx ng serve
+npx ng test --watch=false --coverage
 ```

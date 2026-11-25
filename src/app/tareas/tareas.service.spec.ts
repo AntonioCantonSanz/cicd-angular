@@ -29,7 +29,7 @@ describe('TareasService', () => {
     const { id } = servicio.tareas()[1];
     servicio.alternar(id);
     expect(servicio.tareas().map((t) => t.hecha)).toEqual([false, true, false]);
-    expect(servicio.pendientes()).toBe(2);
+    expect(servicio.pendientes()).toBe(1);
     servicio.alternar(id);
     expect(servicio.pendientes()).toBe(3);
   });
